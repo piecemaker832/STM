@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seok.stm.mappers.upload.ImageFileMapper">
+	
+	<insert id="addFile">
+		INSERT INTO stm_movie_image(
+		file_name, movies_no
+		) VALUES ( #{fileName}, LAST_INSERT_ID())
+	</insert>
+	
+	<select id="getImageFiles" resultType="string">
+		SELECT file_name
+		FROM stm_movie_image
+		WHERE movies_no = #{movieNo}
+		ORDER BY reg_date
+	</select>
+	
+	<delete id="deleteFiles">
+		DELETE FROM stm_movie_image
+		WHERE movies_no = #{movieNo}
+	</delete>
+	
+	<delete id="deleteFile">
+		DELETE FROM stm_movie_image
+		WHERE file_name = #{fileName}
+	</delete>
+
+	<insert id="replaceFile">
+		INSERT INTO stm_movie_image (
+			file_name,
+			movies_no
+		) VALUES(
+			#{fileName},
+			#{movieNo}
+		)
+	</insert>
+	
+	<update id="updateFileCnt">
+		UPDATE stm_movie_image
+		SET file_cnt = (
+			SELECT COUNT(movies_no)
+			FROM tbl_board_file
+			WHERE movies_no = #{movieNo}
+		)
+		WHERE movies_no = #{movieNo}
+	</update>
+</mapper>

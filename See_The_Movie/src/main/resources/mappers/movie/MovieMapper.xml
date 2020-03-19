@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seok.stm.mappers.movie.MovieMapper">
+	<insert id="create">
+		INSERT INTO stm_movie( 
+			movies_no, movies_title, movies_summary, movies_rating, movies_hit, reply_cnt, movies_writer
+			)
+		VALUES( 
+			#{movieNo},#{movieTitle},#{movieSummary},#{movieRating},0,0,#{movieWriter} 
+			)
+	</insert>
+	
+	<select id="read" resultMap="MovieVOResultMap">
+		SELECT 
+		* 
+		FROM stm_movie	
+		WHERE movies_no = #{movieNo}
+	</select>
+	
+	<select id="imageName" resultMap="MovieVOResultMap">
+		SELECT file_name
+		FROM stm_movie_image
+		WHERE movies_no = #{movieNo}
+	</select>
+	
+	<update id="update">
+		UPDATE stm_movie
+		SET
+			movies_title = #{movieTitle} , movies_summary = #{movieSummary} , movies_rating = #{movieRating}
+		WHERE
+			movies_no = #{movieNo}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM stm_movie
+		WHERE movies_no = #{movieNo}
+	</delete>
+	
+	<select id="listAll" resultMap="MovieVOResultMap">
+		<![CDATA[
+			SELECT
+			*
+			FROM stm_movie 
+			WHERE movies_no>0
+			ORDER BY movies_no DESC
+		]]>
+	</select>
+	
+	<select id="listSearch" resultMap="MovieVOResultMap">
+		<![CDATA[
+			SELECT
+			*
+			FROM stm_movie AS sm
+			LEFT JOIN stm_movie_image AS smi ON sm.movies_no = smi.movies_no
+			WHERE sm.movies_no>0
+		]]>
+		<include refid="search"/>
+		<![CDATA[
+			GROUP BY smi.movies_no
+			ORDER BY sm.movies_no DESC
+			LIMIT #{pageStart},#{perPageNum}
+		]]>
+	</select>
+	
+	<select id="countSearchedMovies" resultType="int">
+  		<![CDATA[
+  			SELECT
+  			 COUNT(movies_no)
+  			FROM stm_movie
+  			WHERE movies_no > 0
+  		]]>
+  		<include refid="search"/>
+  	</select>
+	
+	<update id="updateHit">
+  		UPDATE stm_movie
+  		SET
+  			movies_hit= movies_hit+1
+  		WHERE
+  			movies_no = #{movieNo}
+  	</update>
+  	
+  	<sql id="search">
+  		 <if test="searchType != null">
+            <if test="searchType == 't'.toString()">
+                AND movies_title LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'c'.toString()">
+                AND movies_summary LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'w'.toString()">
+                AND movies_writer LIKE CONCAT('%', #{keyword}, '%')
+            </if>
+            <if test="searchType == 'tc'.toString()">
+                AND (
+                    movies_title LIKE CONCAT('%', #{keyword}, '%')
+                    OR movies_summary LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+            <if test="searchType == 'cw'.toString()">
+                AND (
+                    movies_summary LIKE CONCAT('%', #{keyword}, '%')
+                    OR movies_writer LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+            <if test="searchType == 'tcw'.toString()">
+                AND (
+                    movies_title LIKE CONCAT('%', #{keyword}, '%')
+                    OR movies_summary LIKE CONCAT('%', #{keyword}, '%')
+                    OR movies_writer LIKE CONCAT('%', #{keyword}, '%')
+                )
+            </if>
+        </if>
+  	</sql>
+	
+	 <resultMap id="MovieVOResultMap" type="MovieVO">
+  		<id property="movieNo" column="movies_no"/>
+  		<id property="movieTitle" column="movies_title"/>
+  		<id property="movieSummary" column="movies_summary"/>
+  		<id property="movieDate" column="movies_date"/>
+  		<id property="movieRating" column="movies_rating"/>
+  		<id property="movieHit" column="movies_hit"/>
+  		<id property="replyCnt" column="reply_cnt"/>
+  		<id property="movieWriter" column="movies_writer"/>
+  		<id property="mainImage" column="file_name"/>
+  	</resultMap>
+</mapper>

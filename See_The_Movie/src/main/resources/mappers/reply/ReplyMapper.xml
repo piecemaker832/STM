@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seok.stm.mappers.reply.ReplyMapper">
+	<insert id="create">
+		INSERT INTO stm_reply(
+		movies_no, reply_text, reply_writer
+		) VALUES ( #{movieNo},#{replyText},#{replyWriter})
+	</insert>
+	
+	<update id="update">
+		UPDATE stm_reply
+		SET
+		reply_text = #{replyText}, update_date= NOW()
+		WHERE
+		reply_no = #{replyNo}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM stm_reply
+		WHERE reply_no = #{replyNo}
+	</delete>
+	
+	<select id="listPaging" resultMap="ReplyResultMap">
+		SELECT
+			reply_no, movies_no, reply_text, reply_writer, reg_date, update_date
+		FROM stm_reply
+		WHERE movies_no = #{movieNo}
+		ORDER BY reply_no DESC
+		LIMIT #{criteria.pageStart},#{criteria.perPageNum}
+	</select>
+	
+	<select id="countReply" resultType="int">
+		SELECT
+			COUNT(movies_no)
+		FROM stm_reply
+		WHERE movies_no = #{movieNo}
+	</select>
+	
+	<resultMap id="ReplyResultMap" type="ReplyVO">
+		<id property="replyNo" column="reply_no" />
+		<id property="movieNo" column="movies_no" />
+		<id property="replyText" column="reply_text" />
+		<id property="replyWriter" column="reply_writer" />
+		<id property="regDate" column="reg_date" />
+		<id property="updateDate" column="update_date" />
+	</resultMap>
+</mapper>

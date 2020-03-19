@@ -1,0 +1,73 @@
+@charset "EUC-KR";
+
+body {
+    background-color: #212529;
+}
+
+#rating a {
+	text-decoration: none;
+	color: gray;
+}
+
+#rating a.on {
+	color: red;
+}
+/* read.jsp */
+
+#carouselExampleIndicators {
+	margin: 0px 0px 0px 150px;
+}
+
+
+
+/* write.jsp */
+.bg-light {
+    width: 500px;
+}
+
+.card{
+	margin: 0px 0px 0px 90px;
+}
+.card-text{
+  overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap:break-word; 
+    line-height: 1.2em;
+    height: 3.6em; /* line-height 가 1.2em 이고 3라인을 자르기 때문에 height는 1.2em * 3 = 3.6em */
+  
+}
+
+.board_title {
+	font-weight: 700;
+	font-size: 22pt;
+	margin: 10pt;
+}
+
+.board_info_box {
+	color: #6B6B6B;
+	margin: 10pt;
+}
+
+.board_author {
+	font-size: 10pt;
+	margin-right: 10pt;
+}
+
+.board_date {
+	font-size: 10pt;
+}
+
+.board_content {
+	color: #444343;
+	font-size: 12pt;
+	margin: 10pt;
+}
+
+.board_tag {
+	font-size: 11pt;
+	margin: 10pt;
+	padding-bottom: 10pt;
+}
