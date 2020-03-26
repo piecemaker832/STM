@@ -46,6 +46,7 @@ public class MovieController {
 	public String writePOST(MovieVO movieVO, RedirectAttributes redirectAttributes) throws Exception {
 		
 		logger.info("write POST");
+		movieVO.setMovieSummary(movieVO.getMovieSummary().replace("\r\n", "<br>"));
 		movieService.create(movieVO);
 		redirectAttributes.addFlashAttribute("msg","regSuccess");
 		

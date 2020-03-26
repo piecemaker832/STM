@@ -145,30 +145,37 @@
 	<script id="replyTemplate" type="text/x-handlebars-template">
 
     {{#each.}}
-    <div class="post replyDiv" style="border-bottom : 10px solid white; background-color: #f3f2e18f;" data-replyNo={{replyNo}}>
+    <div class="post replyDiv" style="border-bottom : 10px solid white; background-color: #fbdbcd6b;" data-replyNo={{replyNo}}>
         <div class="user-block">
-			<span>
-                <%--작성자 이름--%>
-                <a href="#" style="font-weight:bold;"><font size="4" color="#0B610B">{{replyWriter}}</a></font>
-			</span>
-			<c:if test="${login.userId eq movies.movieWriter}">
-			<span style="text-align:right;">
-                <%--댓글 삭제 버튼--%>
-                <a href="#" class="replyDelBtn" data-toggle="modal" data-target="#delModal"><font color="#da3e3e">
-                    <i class="fa fa-times"> 삭제</i>
-                </a></font>
-                <%--댓글 수정 버튼--%>
-                <a href="#" class="replyModBtn" data-toggle="modal" data-target="#modModal"><font color="#5d93d6">
-                    <i class="fa fa-edit"> 수정</i>
-                </a></font>
-			</span>
-			</c:if>
-			<br/>
+			<div class="container">
+  			  <div class="row">
+   			     <div class="col-sm-4" style="text-align: left; padding-left:5px;">
+					 <%--작성자 이름--%>
+              	  <a href="#" style="font-weight:bold;"><font size="4" color="#0B610B">{{replyWriter}}</a></font>
+				 </div>
+    			 <div class="col-sm-8" style="text-align: right;">
+					<c:if test="${login.userId eq movies.movieWriter}">
+					 <%--댓글 삭제 버튼--%>
+               		 <a href="#" class="replyDelBtn" data-toggle="modal" data-target="#delModal"><font color="#da3e3e">
+                  	 	<i class="fa fa-times"> 삭제</i>
+               		 </a></font>
+               		 <%--댓글 수정 버튼--%>
+               		 <a href="#" class="replyModBtn" data-toggle="modal" data-target="#modModal"><font color="#5d93d6">
+               		    <i class="fa fa-edit"> 수정</i>
+               		 </a></font>
+					</c:if>
+				 </div>
+  			  </div>
+			</div>
+			
+			
             <%--댓글 작성일자--%>
+			<div style="padding-left:5px;">
             <font size="2">{{prettifyDate regDate}}</font>
+			</div>
         </div>
         <%--댓글 내용--%>
-        <div class="oldReplyText">{{{escape replyText}}}</div>
+        <div class="oldReplyText" style="padding-left:5px;">{{{escape replyText}}}</div>
         <br/>
     </div> 
     {{/each}} <%-- c:forEach 와 같은 배열의 루프처리 --%>

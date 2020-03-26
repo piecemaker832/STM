@@ -90,15 +90,6 @@ $(document).ready(function() {
 					}
 				}
 				
-				
-				$(".oo").on("click",function() {
-					console.log($(".mailbox-attachment-name").attr("href"))
-					if($(".mailbox-attachment-name").attr("href")==null) {
-							alert("이미지를 업로드 해주세요");
-							return false;
-						}
-				});
-				
 				//게시글 입력/수정 submit 처리시에 첨부파일 정보도 함께 처리
  				function  filesSubmit(that) {
  					var str = "";
@@ -150,7 +141,7 @@ $(document).ready(function() {
  						// 원본 이미지 요청 링크
  						originalFileUrl = getContextPath()+"/movie/file/display?fileName=" + originalImg;
  					} else {
- 						imgSrc = getContextPath()+"/resources/files/fileIcon.png" //파일 아이콘 이미지 링크
+ 						imgSrc = getContextPath()+"/resources/files/noImage.png" //파일 아이콘 이미지 링크
  						uuidFileName = fullName.substr(12);
  						//파일 다운로드 요청 링크
  						originalFileUrl = getContextPath()+"/movie/file/display?fileName=" + fullName;

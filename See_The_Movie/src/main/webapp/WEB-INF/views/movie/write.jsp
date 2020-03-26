@@ -89,7 +89,6 @@
 				<button class="btn btn-primary listBtn" type="button">목록</button>
 				<button class="btn btn-secondary" type="reset">초기화</button>
 				<button type="submit" class="btn btn-success btnSave" id="btnSave">저장</button>
-				<button class="btn btn-primary oo" type="button">확인용</button>
 			</div>
 	</div>
 	</form>
@@ -100,7 +99,7 @@
 	<script id="fileTemplate" type="text/x-handlebars-template">
 		<li>
 			<span class="mailbox-attachment-icon has-img">
-				<img src = "{{imgSrc}}" alt="Attachment">
+				<i class="fas fa-image"></i>
 			</span>
 			<div class="mailbox-attachment-info">
 				<a href="{{originalFileUrl}}" class="mailbox-attachment-name">

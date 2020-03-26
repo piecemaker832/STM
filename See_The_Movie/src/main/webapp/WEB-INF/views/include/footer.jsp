@@ -11,8 +11,12 @@
 <br>
 <br>
 <br>
-<div class="jumbotron" style=" background-color: #0e253d;">
-	<p>footer</p>
+<div class="jumbotron text-center mt-5 mb-0" style=" background-color: #0e253d;" >
+	<h3 class="text-secondary">See The Movie</h3> 
+	<p style="color:orange">
+	See The Movie (STM) is powered by <span class="text-primary">Yoonseok</span> / Designed by <span class="text-primary">Yoonseok</span>
+	</p>
+
 </div>
 </body>
 </html>

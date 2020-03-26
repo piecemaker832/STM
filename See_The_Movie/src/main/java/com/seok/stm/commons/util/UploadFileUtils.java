@@ -40,10 +40,10 @@ public class UploadFileUtils {
 		File target = new File(rootPath + datePath, uuidFileName); //파일 객체 생성
 		FileCopyUtils.copy(fileData, target); //파일 객체에 파일 데이터 복사
 		
-		// 4. 이미지 파일인 경우 썸네일이미지 생성
-		if(MediaUtils.getMediaType(originalFileName)!=null) {
-			uuidFileName = makeThumbnail(rootPath, datePath, uuidFileName);
-		}
+//		// 4. 이미지 파일인 경우 썸네일이미지 생성
+//		if(MediaUtils.getMediaType(originalFileName)!=null) {
+//			uuidFileName = makeThumbnail(rootPath, datePath, uuidFileName);
+//		}
 
 		// 5. 파일 저장 경로 치환
 		return replaceSavedFilePath(datePath,uuidFileName);
@@ -136,24 +136,24 @@ public class UploadFileUtils {
 
 	
 	// 썸네일 이미지 생성
-	private static String makeThumbnail(String uploadRootPath, String datePath, String fileName) throws Exception {
-		//원본이미지를 메모리상에 로딩
-		BufferedImage originalImg = ImageIO.read(new File(uploadRootPath + datePath, fileName));
-		//원본이미지를 축소
-		BufferedImage thumbnailImg = Scalr.resize(originalImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT,100);
-		//썸네일 파일명
-		String thumbnailImgName = "s_" + fileName;
-		//썸네일 업로드 경로
-		String fullPath = uploadRootPath + datePath + File.separator + thumbnailImgName;
-		//썸네일 파일 객체생성
-		File newFile = new File(fullPath);
-		//썸네일 파일 확장자 추출
-		String formatName = MediaUtils.getFormatName(fileName);
-		//썸네일 파일 저장
-		ImageIO.write(thumbnailImg, formatName, newFile);
-		
-		return thumbnailImgName;
-	}
+//	private static String makeThumbnail(String uploadRootPath, String datePath, String fileName) throws Exception {
+//		//원본이미지를 메모리상에 로딩
+//		BufferedImage originalImg = ImageIO.read(new File(uploadRootPath + datePath, fileName));
+//		//원본이미지를 축소
+//		BufferedImage thumbnailImg = Scalr.resize(originalImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT,100);
+//		//썸네일 파일명
+//		String thumbnailImgName = "s_" + fileName;
+//		//썸네일 업로드 경로
+//		String fullPath = uploadRootPath + datePath + File.separator + thumbnailImgName;
+//		//썸네일 파일 객체생성
+//		File newFile = new File(fullPath);
+//		//썸네일 파일 확장자 추출
+//		String formatName = MediaUtils.getFormatName(fileName);
+//		//썸네일 파일 저장
+//		ImageIO.write(thumbnailImg, formatName, newFile);
+//		
+//		return thumbnailImgName;
+//	}
 }
 
 

@@ -7,35 +7,37 @@
 <html>
 <head>
 <style>
-h1{
+#header{
 	text-shadow:-1px 0 orange,0 1px orange,1px 0 orange,0 -1px orange;
 }
+
 </style>
 </head>
 <body>
-	<div class="jumbotron jumbotron-fluid" style=" background-color: #0e253d;">
-		<h1 class="display-4"OnClick="location.href ='${path}/movie/listall'" 
+	<div class="jumbotron jumbotron-fluid" style=" background-color: #0e253d; padding-top: 40px;padding-bottom: 20px;">
+		<h1 id="header" class="display-4"OnClick="location.href ='${path}/movie/listall'" 
 			style=" cursor:pointer; text-align:center; color:red;">
 		<strong>See The Movie</strong></h1>
 		<div align="right">
 		<c:choose>
 	        <c:when test="${empty login.userId }">
-				<button class="btn btn-primary btn-sm btnLogin"
+				<button class="btn btn-outline-warning btn-sm btnLogin"
 				onclick="javascript:location.href='${path}/user/login'">Login</button>
-				<button class="btn btn-primary btn-sm btnJoin"
-				onclick="javascript:location.href='${path}/user/register'">Register</button>
+				<button class="btn btn-outline-warning btn-sm btnJoin"
+				onclick="javascript:location.href='${path}/user/register'">Register</button>&nbsp &nbsp
 	        </c:when>
 	        <c:otherwise>
-	       		<button class="btn btn-primary btn-sm btnLogout" 
+	       		<button class="btn btn-outline-warning btn-sm btnLogout" 
 	       		onclick="javascript:location.href='${path}/user/logout'">Logout</button>
-				<button class="btn btn-primary btn-sm btnModify"
-				onclick="javascript:location.href='${path}/user/update'">Modify</button>
+				<button class="btn btn-outline-warning btn-sm btnModify"
+				onclick="javascript:location.href='${path}/user/update'">Modify</button>&nbsp &nbsp
 	        </c:otherwise>
 	        </c:choose>
 		</div>
-		<div align="right">
+		<br>
+		<div align="right" style="color:orange">
 			<c:if test="${not empty login.userId}">
-			<p>${login.userId}님 안녕하세요!</p>
+			<p><strong>${login.userId}</strong>님 환영합니다! &nbsp &nbsp</p>
 			</c:if>
 		</div>
 	</div>
